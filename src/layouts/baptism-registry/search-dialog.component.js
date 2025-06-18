@@ -83,8 +83,9 @@ export default function SearchDialogComponent(props) {
           if (!query.trim()) return [];
           const regExp = new RegExp(`${query.trim()}`, "gi");
           return allDataRef.current.filter(
-            (entryData) =>
-              entryData.name.match(regExp) || entryData.serialNumber.toString().match(regExp)
+            (entryData) => {
+              return entryData.name && entryData.name.match(regExp) || entryData.serialNumber && entryData.serialNumber.toString().match(regExp)
+            }
           );
         })
       )
